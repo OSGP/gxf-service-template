@@ -5,6 +5,7 @@ plugins {
     id("io.spring.dependency-management") version "1.1.0"
     kotlin("jvm") version "1.7.22"
     kotlin("plugin.spring") version "1.7.22"
+    id("com.github.davidmc24.gradle.plugin.avro") version "1.5.0"
 }
 
 group = "com.gxf"
@@ -19,6 +20,10 @@ configurations {
 
 repositories {
     mavenCentral()
+    maven {
+        name = "confluent"
+        url = uri("https://packages.confluent.io/maven/")
+    }
 }
 
 extra["testcontainersVersion"] = "1.17.6"
@@ -27,10 +32,14 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-actuator")
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
+
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("org.springframework.kafka:spring-kafka")
-    developmentOnly("org.springframework.boot:spring-boot-devtools")
+
+    implementation("org.apache.avro:avro:1.11.1")
+    implementation("io.confluent:kafka-avro-serializer:7.3.0")
+
     runtimeOnly("io.micrometer:micrometer-registry-prometheus")
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
     testImplementation("org.springframework.boot:spring-boot-starter-test")

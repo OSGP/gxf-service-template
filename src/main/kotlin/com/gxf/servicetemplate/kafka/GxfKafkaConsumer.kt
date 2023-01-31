@@ -1,5 +1,6 @@
 package com.gxf.servicetemplate.kafka
 
+import com.gxf.service.Measurement
 import org.apache.kafka.clients.consumer.ConsumerRecord
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
@@ -13,8 +14,8 @@ class GxfKafkaConsumer {
         val logger: Logger = LoggerFactory.getLogger("GxfKafkaConsumer")
     }
 
-    @KafkaListener(topics = ["topic"])
-    fun listen(record: ConsumerRecord<String, String>) {
-        logger.info("Receiving: ${record.value()}")
+    @KafkaListener(topics = ["avroTopic"])
+    fun consume(record: ConsumerRecord<String, Measurement>) {
+        logger.trace("Receiving: ${record.value().device.deviceId}")
     }
 }

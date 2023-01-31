@@ -1,0 +1,35 @@
+{
+  "name": "Measurement",
+  "namespace": "com.gxf.service",
+  "type": "record",
+  "fields": [
+    {
+      "name": "device",
+      "type": {
+        "name": "Device",
+        "type": "record",
+        "fields": [
+          {
+            "name": "device_id",
+            "type": "int"
+          },
+          {
+            "name": "device_type",
+            "type": {
+              "name": "DeviceType",
+              "type": "enum",
+              "symbols": [
+                "LIGHT_SENSOR",
+                "SMART_METER"
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "value",
+      "type": "double"
+    }
+  ]
+}
