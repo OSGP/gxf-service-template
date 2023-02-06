@@ -37,6 +37,9 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("org.springframework.kafka:spring-kafka")
 
+    implementation("org.springframework:spring-aspects")
+    implementation("org.springframework:spring-aop")
+
     implementation("org.apache.avro:avro:1.11.1")
     implementation("io.confluent:kafka-avro-serializer:7.3.0")
 
