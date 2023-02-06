@@ -4,32 +4,33 @@
   "type": "record",
   "fields": [
     {
-      "name": "device",
-      "type": {
-        "name": "Device",
-        "type": "record",
-        "fields": [
-          {
-            "name": "device_id",
-            "type": "int"
-          },
-          {
-            "name": "device_type",
-            "type": {
-              "name": "DeviceType",
-              "type": "enum",
-              "symbols": [
-                "LIGHT_SENSOR",
-                "SMART_METER"
-              ]
-            }
-          }
-        ]
-      }
+      "name": "Timestamp",
+      "type": "long"
     },
     {
-      "name": "value",
-      "type": "double"
+      "name": "device_id",
+      "type": "long"
+    },
+    {
+      "name": "voltageMeasurements",
+      "type": {
+        "name": "VoltageMeasurements",
+        "type": "array",
+        "items": {
+          "name": "VoltageMeasurement",
+          "type": "record",
+          "fields": [
+            {
+              "name": "value",
+              "type": "double"
+            },
+            {
+              "name": "name",
+              "type": "string"
+            }
+          ]
+        }
+      }
     }
   ]
 }
