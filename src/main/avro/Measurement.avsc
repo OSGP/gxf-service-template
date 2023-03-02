@@ -8,7 +8,7 @@
       "type": "long"
     },
     {
-      "name": "device_id",
+      "name": "producer_id",
       "type": "long"
     },
     {
@@ -21,8 +21,8 @@
           "type": "record",
           "fields": [
             {
-              "name": "value",
-              "type": "double"
+              "name": "voltage",
+              "type": "float"
             },
             {
               "name": "name",

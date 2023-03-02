@@ -44,7 +44,13 @@ dependencies {
     implementation("io.confluent:kafka-avro-serializer:7.3.0")
 
     runtimeOnly("io.micrometer:micrometer-registry-prometheus")
+
+    // Database
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+    runtimeOnly("com.h2database:h2")
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
+
+    // Test
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.springframework.kafka:spring-kafka-test")
     testImplementation("org.testcontainers:junit-jupiter")

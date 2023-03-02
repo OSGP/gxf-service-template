@@ -5,6 +5,7 @@ import io.micrometer.observation.annotation.Observed
 import org.apache.kafka.clients.consumer.ConsumerRecord
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.kafka.annotation.KafkaListener
 import org.springframework.stereotype.Service
 
@@ -18,6 +19,6 @@ class GxfKafkaConsumer {
     @KafkaListener(topics = ["avroTopic"])
     @Observed(name = "consumer.consumed")
     fun consume(record: ConsumerRecord<String, Measurement>) {
-        logger.trace("Receiving: ${record.value().deviceId}")
+        logger.trace("Receiving: ${record.value().producerId}")
     }
 }

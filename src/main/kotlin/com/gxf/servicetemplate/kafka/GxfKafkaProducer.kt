@@ -25,7 +25,7 @@ class GxfKafkaProducer(val kafkaTemplate: KafkaTemplate<String, Measurement>) {
         logger.info("Producing: ${DateTimeFormatter.ISO_DATE_TIME.format(LocalDateTime.now())}")
         (1000..2000).forEach {
             val message =
-                Measurement(Instant.now().toEpochMilli(), it.toLong(), listOf(VoltageMeasurement(Random.nextDouble(), "one")))
+                Measurement(Instant.now().toEpochMilli(), it.toLong(), listOf(VoltageMeasurement(Random.nextFloat(), "one")))
             kafkaTemplate.send("avroTopic", message)
         }
         logger.info("Produced: ${DateTimeFormatter.ISO_DATE_TIME.format(LocalDateTime.now())}")
