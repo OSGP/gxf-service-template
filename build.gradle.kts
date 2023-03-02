@@ -43,6 +43,9 @@ dependencies {
     implementation("org.apache.avro:avro:1.11.1")
     implementation("io.confluent:kafka-avro-serializer:7.3.0")
 
+    implementation("com.influxdb:influxdb-client-kotlin:6.7.0")
+    implementation("com.influxdb:influxdb-spring:6.7.0")
+
     runtimeOnly("io.micrometer:micrometer-registry-prometheus")
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
 }

@@ -1,6 +1,7 @@
 package com.gxf.servicetemplate.kafka
 
 import com.gxf.service.Measurement
+import com.gxf.servicetemplate.influx.GxfInfluxService
 import io.micrometer.observation.annotation.Observed
 import org.apache.kafka.clients.consumer.ConsumerRecord
 import org.slf4j.Logger
@@ -9,7 +10,7 @@ import org.springframework.kafka.annotation.KafkaListener
 import org.springframework.stereotype.Service
 
 @Service
-class GxfKafkaConsumer {
+class GxfKafkaConsumer(val influxService: GxfInfluxService) {
 
     companion object {
         val logger: Logger = LoggerFactory.getLogger(this::class.java)
@@ -19,5 +20,6 @@ class GxfKafkaConsumer {
     @Observed(name = "consumer.consumed")
     fun consume(record: ConsumerRecord<String, Measurement>) {
         logger.trace("Receiving: ${record.value().deviceId}")
+        influxService.postMeasurement(record.value())
     }
 }
