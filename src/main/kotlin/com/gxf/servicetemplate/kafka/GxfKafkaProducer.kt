@@ -18,7 +18,7 @@ class GxfKafkaProducer(
 ) {
 
     companion object {
-        val logger: Logger = LoggerFactory.getLogger("Producer")
+        val logger: Logger = LoggerFactory.getLogger("GxfKafkaProducer")
     }
 
     @Scheduled(cron = "* * * * * *")
