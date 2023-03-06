@@ -32,3 +32,16 @@ services:
       SCHEMA_REGISTRY_HOST_NAME: schema-registry
       SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS: 'kafka:29092'
       SCHEMA_REGISTRY_LISTENERS: http://0.0.0.0:8081
+  # Run The following commands in sepereate terminals to test:
+  # 1: mosquitto_sub -h localhost -t "sensor/temperature" -u admin -P password
+  # 2: mosquitto_pub -h localhost -t sensor/temperature -m 23 -u admin -P password
+  mosquitto:
+    image: eclipse-mosquitto:2
+    volumes:
+      - ./docker/mosquitto/config/:/mosquitto/config/
+      - mosquitto:/mosquitto/data/
+    ports:
+      - 1883:1883
+      - 9001:9001
+volumes:
+  mosquitto: ~
