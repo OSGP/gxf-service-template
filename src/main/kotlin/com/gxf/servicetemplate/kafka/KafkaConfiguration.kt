@@ -22,10 +22,10 @@ class KafkaConfiguration {
 
 
     @Value("\${kafka.bootstrap-servers}")
-    lateinit var bootstrapServers: String
+    private lateinit var bootstrapServers: String
 
     @Value("\${kafka.schema.registry.url}")
-    lateinit var schemaRegistryUrl: String
+    private lateinit var schemaRegistryUrl: String
 
     @Bean
     fun kafkaListenerContainerFactory(consumerFactory: ConsumerFactory<String, Measurement>): ConcurrentKafkaListenerContainerFactory<String, Measurement> {
