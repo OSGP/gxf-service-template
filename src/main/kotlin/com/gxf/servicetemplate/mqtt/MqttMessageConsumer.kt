@@ -1,5 +1,6 @@
 package com.gxf.servicetemplate.mqtt
 
+import com.gxf.servicetemplate.kafka.GxfKafkaProducer
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.context.annotation.Bean
@@ -13,7 +14,8 @@ import org.springframework.stereotype.Service
 
 @Service
 class MqttMessageConsumer(
-    private val clientFactory: MqttPahoClientFactory
+    private val clientFactory: MqttPahoClientFactory,
+    private val kafkaProducer: GxfKafkaProducer
 ) {
 
     companion object {
@@ -30,5 +32,6 @@ class MqttMessageConsumer(
 
     private fun processMqttMessage(m: Message<*>) {
         logger.info("mqtt: ${m.headers.timestamp} - ${m.payload}")
+        kafkaProducer.publish((m.payload as String).toDouble())
     }
 }
