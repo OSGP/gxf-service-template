@@ -13,12 +13,12 @@ import java.time.format.DateTimeFormatter
 
 @Service
 class GxfKafkaProducer(
-    val kafkaTemplate: KafkaTemplate<String, Measurement>,
-    val measurementGenerator: MeasurementGenerator
+    private val kafkaTemplate: KafkaTemplate<String, Measurement>,
+    private val measurementGenerator: MeasurementGenerator
 ) {
 
     companion object {
-        val logger: Logger = LoggerFactory.getLogger("GxfKafkaProducer")
+        val logger: Logger = LoggerFactory.getLogger(this::class.java)
     }
 
     @Scheduled(cron = "* * * * * *")

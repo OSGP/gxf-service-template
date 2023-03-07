@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service
 class GxfKafkaConsumer {
 
     companion object {
-        val logger: Logger = LoggerFactory.getLogger("GxfKafkaConsumer")
+        val logger: Logger = LoggerFactory.getLogger(this::class.java)
     }
 
     @KafkaListener(topics = ["avroTopic"])
