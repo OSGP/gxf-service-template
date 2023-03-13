@@ -84,11 +84,13 @@ springBoot {
 
 tasks.named<org.springframework.boot.gradle.tasks.bundling.BootBuildImage>("bootBuildImage") {
     imageName.set(System.getenv("REGISTRY"))
-    publish.set(true)
-    docker {
-        publishRegistry {
-            username.set(System.getenv("GITHUB_ACTOR"))
-            password.set(System.getenv("GITHUB_TOKEN"))
+    if (project.hasProperty("publish")) {
+        publish.set(true)
+        docker {
+            publishRegistry {
+                username.set(System.getenv("GITHUB_ACTOR"))
+                password.set(System.getenv("GITHUB_TOKEN"))
+            }
         }
     }
 }
