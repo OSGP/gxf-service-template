@@ -83,7 +83,7 @@ springBoot {
 }
 
 tasks.named<org.springframework.boot.gradle.tasks.bundling.BootBuildImage>("bootBuildImage") {
-    imageName.set(System.getenv("REGISTRY"))
+    imageName.set(System.getenv("IMAGE").toLowerCase())
     if (project.hasProperty("publishImage")) {
         publish.set(true)
         docker {
