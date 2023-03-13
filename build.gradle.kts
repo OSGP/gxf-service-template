@@ -84,7 +84,7 @@ springBoot {
 
 tasks.named<org.springframework.boot.gradle.tasks.bundling.BootBuildImage>("bootBuildImage") {
     imageName.set(System.getenv("REGISTRY"))
-    if (project.hasProperty("publish")) {
+    if (project.hasProperty("publishImage")) {
         publish.set(true)
         docker {
             publishRegistry {
