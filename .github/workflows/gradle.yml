@@ -1,6 +1,8 @@
-name: Pull request pipeline
+name: Gradle Pipeline
 
 on:
+  push:
+    branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
 
@@ -18,3 +20,11 @@ jobs:
         uses: gradle/gradle-build-action@v2.4.0
         with:
           arguments: build bootBuildImage
+      - name: Publish Docker image
+        if: github.ref == 'refs/heads/main'
+        uses: gradle/gradle-build-action@v2.4.0
+        with:
+          arguments: bootBuildImage -PpublishImage
+        env:
+          GITHUB_ACTOR: ${{ github.actor }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
