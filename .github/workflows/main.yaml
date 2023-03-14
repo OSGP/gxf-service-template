@@ -23,6 +23,5 @@ jobs:
         with:
           arguments: bootBuildImage -PpublishImage
         env:
-          IMAGE: ghcr.io/${{ github.repository }}
           GITHUB_ACTOR: ${{ github.actor }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

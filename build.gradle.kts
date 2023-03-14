@@ -83,7 +83,7 @@ springBoot {
 }
 
 tasks.named<org.springframework.boot.gradle.tasks.bundling.BootBuildImage>("bootBuildImage") {
-    imageName.set(System.getenv("IMAGE").toLowerCase())
+    imageName.set("ghcr.io/osgp/${rootProject.name}")
     if (project.hasProperty("publishImage")) {
         publish.set(true)
         docker {
