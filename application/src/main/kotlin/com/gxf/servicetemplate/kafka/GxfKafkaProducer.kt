@@ -21,10 +21,10 @@ class GxfKafkaProducer(
         private val logger: Logger = LoggerFactory.getLogger(this::class.java)
     }
 
-    @Scheduled(cron = "* * * * * *")
+    @Scheduled(cron = "*/10 * * * * *")
     fun producer() {
         logger.info("Producing: ${DateTimeFormatter.ISO_DATE_TIME.format(LocalDateTime.now())}")
-        (1000..2000).forEach {
+        (10..20).forEach {
             kafkaTemplate.send("avroTopic", measurementGenerator.generateMeasurement(it.toLong()))
         }
         logger.info("Produced: ${DateTimeFormatter.ISO_DATE_TIME.format(LocalDateTime.now())}")
