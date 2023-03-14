@@ -26,8 +26,6 @@ repositories {
     }
 }
 
-extra["testcontainersVersion"] = "1.17.6"
-
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-actuator")
     implementation("org.springframework.boot:spring-boot-starter-web")
@@ -45,12 +43,6 @@ dependencies {
 
     runtimeOnly("io.micrometer:micrometer-registry-prometheus")
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
-}
-
-dependencyManagement {
-    imports {
-        mavenBom("org.testcontainers:testcontainers-bom:${property("testcontainersVersion")}")
-    }
 }
 
 tasks.withType<KotlinCompile> {
@@ -72,7 +64,7 @@ testing {
                 implementation(project())
                 implementation("org.springframework.boot:spring-boot-starter-test")
                 implementation("org.springframework.kafka:spring-kafka-test")
-                implementation("org.testcontainers:kafka")
+                implementation("org.testcontainers:kafka:1.17.6")
             }
         }
     }
