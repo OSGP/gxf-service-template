@@ -6,8 +6,6 @@ import org.slf4j.LoggerFactory
 import org.springframework.kafka.core.KafkaTemplate
 import org.springframework.scheduling.annotation.Scheduled
 import org.springframework.stereotype.Service
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
 import kotlin.random.Random
 
 
@@ -21,10 +19,10 @@ class GxfKafkaProducer(
         private val logger: Logger = LoggerFactory.getLogger(this::class.java)
     }
 
-    @Scheduled(cron = "*/10 * * * * *")
+    @Scheduled(cron = "* * * * * *")
     fun producer() {
-        logger.info("Producing: ${DateTimeFormatter.ISO_DATE_TIME.format(LocalDateTime.now())}")
-
-        kafkaTemplate.send("avroTopic", measurementGenerator.generateMeasurement(Random.nextLong()))
+        val deviceId = Random.nextLong()
+        logger.info("Producing: ${deviceId}")
+        kafkaTemplate.send("avroTopic", measurementGenerator.generateMeasurement(deviceId))
     }
 }
