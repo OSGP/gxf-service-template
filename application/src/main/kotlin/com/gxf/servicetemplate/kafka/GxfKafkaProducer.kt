@@ -8,6 +8,7 @@ import org.springframework.scheduling.annotation.Scheduled
 import org.springframework.stereotype.Service
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
+import kotlin.random.Random
 
 
 @Service
@@ -23,9 +24,7 @@ class GxfKafkaProducer(
     @Scheduled(cron = "*/10 * * * * *")
     fun producer() {
         logger.info("Producing: ${DateTimeFormatter.ISO_DATE_TIME.format(LocalDateTime.now())}")
-        (10..20).forEach {
-            kafkaTemplate.send("avroTopic", measurementGenerator.generateMeasurement(it.toLong()))
-        }
-        logger.info("Produced: ${DateTimeFormatter.ISO_DATE_TIME.format(LocalDateTime.now())}")
+
+        kafkaTemplate.send("avroTopic", measurementGenerator.generateMeasurement(Random.nextLong()))
     }
 }

@@ -18,6 +18,6 @@ class GxfKafkaConsumer {
     @KafkaListener(topics = ["avroTopic"])
     @Observed(name = "consumer.consumed")
     fun consume(record: ConsumerRecord<String, Measurement>) {
-        logger.trace("Receiving: ${record.value().deviceId}")
+        logger.info("Receiving: ${record.value().deviceId}")
     }
 }
