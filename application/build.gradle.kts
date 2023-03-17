@@ -5,26 +5,9 @@ plugins {
     id("io.spring.dependency-management") version "1.1.0"
     kotlin("jvm") version "1.7.22"
     kotlin("plugin.spring") version "1.7.22"
-    id("com.github.davidmc24.gradle.plugin.avro") version "1.5.0"
 }
 
-group = "com.gxf"
-version = "0.0.1-SNAPSHOT"
 java.sourceCompatibility = JavaVersion.VERSION_17
-
-configurations {
-    compileOnly {
-        extendsFrom(configurations.annotationProcessor.get())
-    }
-}
-
-repositories {
-    mavenCentral()
-    maven {
-        name = "confluent"
-        url = uri("https://packages.confluent.io/maven/")
-    }
-}
 
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-actuator")
@@ -38,7 +21,7 @@ dependencies {
     implementation("org.springframework:spring-aspects")
     implementation("org.springframework:spring-aop")
 
-    implementation("org.apache.avro:avro:1.11.1")
+    implementation(project(":components:avro"))
     implementation("io.confluent:kafka-avro-serializer:7.3.0")
 
     runtimeOnly("io.micrometer:micrometer-registry-prometheus")
