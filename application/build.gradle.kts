@@ -24,6 +24,8 @@ dependencies {
     implementation(project(":components:avro"))
     implementation("io.confluent:kafka-avro-serializer:7.3.0")
 
+    implementation(project(":components:mqtt"))
+
     runtimeOnly("io.micrometer:micrometer-registry-prometheus")
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
 }
