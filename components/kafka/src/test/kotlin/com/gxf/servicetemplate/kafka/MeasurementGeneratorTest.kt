@@ -1,4 +1,4 @@
-package com.gxf.servicetemplate.measurement
+package com.gxf.servicetemplate.kafka
 
 import org.junit.jupiter.api.Assertions.*
 

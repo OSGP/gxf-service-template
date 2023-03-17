@@ -10,20 +10,10 @@ plugins {
 java.sourceCompatibility = JavaVersion.VERSION_17
 
 dependencies {
-    implementation("org.springframework.boot:spring-boot-starter-actuator")
     implementation("org.springframework.boot:spring-boot-starter-web")
-    implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
+    implementation("org.springframework.boot:spring-boot-starter-actuator")
 
-    implementation("org.jetbrains.kotlin:kotlin-reflect")
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-    implementation("org.springframework.kafka:spring-kafka")
-
-    implementation("org.springframework:spring-aspects")
-    implementation("org.springframework:spring-aop")
-
-    implementation(project(":components:avro"))
-    implementation("io.confluent:kafka-avro-serializer:7.3.0")
-
+    implementation(project(":components:kafka"))
     implementation(project(":components:mqtt"))
 
     runtimeOnly("io.micrometer:micrometer-registry-prometheus")

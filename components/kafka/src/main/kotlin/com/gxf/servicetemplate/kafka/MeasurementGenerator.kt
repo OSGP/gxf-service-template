@@ -1,4 +1,4 @@
-package com.gxf.servicetemplate.measurement
+package com.gxf.servicetemplate.kafka
 
 import com.gxf.service.Measurement
 import com.gxf.service.VoltageMeasurement
