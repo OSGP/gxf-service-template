@@ -1,3 +1,8 @@
+pluginManagement {
+    // Define convention plugins
+    includeBuild("build-logic")
+}
+
 rootProject.name = "gxf-service-template"
 
 include("application")
