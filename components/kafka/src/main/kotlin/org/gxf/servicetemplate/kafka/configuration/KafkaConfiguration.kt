@@ -4,7 +4,7 @@
 
 package org.gxf.servicetemplate.kafka.configuration
 
-import com.gxf.service.Measurement
+import org.gxf.service.Measurement
 import org.apache.kafka.common.serialization.StringDeserializer
 import org.apache.kafka.common.serialization.StringSerializer
 import org.springframework.boot.autoconfigure.kafka.KafkaProperties

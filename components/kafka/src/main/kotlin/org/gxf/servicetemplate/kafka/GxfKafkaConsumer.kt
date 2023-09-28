@@ -4,7 +4,7 @@
 
 package org.gxf.servicetemplate.kafka
 
-import com.gxf.service.Measurement
+import org.gxf.service.Measurement
 import io.micrometer.observation.annotation.Observed
 import org.apache.kafka.clients.consumer.ConsumerRecord
 import org.slf4j.Logger

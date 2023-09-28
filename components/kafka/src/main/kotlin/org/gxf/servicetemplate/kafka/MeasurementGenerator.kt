@@ -4,8 +4,8 @@
 
 package org.gxf.servicetemplate.kafka
 
-import com.gxf.service.Measurement
-import com.gxf.service.VoltageMeasurement
+import org.gxf.service.Measurement
+import org.gxf.service.VoltageMeasurement
 import org.springframework.stereotype.Service
 import java.time.Instant
 import kotlin.random.Random

@@ -4,7 +4,7 @@
 
 package org.gxf.servicetemplate.kafka
 
-import com.gxf.service.Measurement
+import org.gxf.service.Measurement
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.kafka.core.KafkaTemplate
