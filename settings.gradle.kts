@@ -2,11 +2,6 @@
 //
 // SPDX-License-Identifier: Apache-2.0
 
-pluginManagement {
-    // Define convention plugins
-    includeBuild("build-logic")
-}
-
 rootProject.name = "gxf-service-template"
 
 include("application")

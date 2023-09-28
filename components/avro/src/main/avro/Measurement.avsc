@@ -1,6 +1,6 @@
 {
   "name": "Measurement",
-  "namespace": "com.gxf.service",
+  "namespace": "org.gxf.service",
   "type": "record",
   "fields": [
     {

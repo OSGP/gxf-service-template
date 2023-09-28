@@ -3,7 +3,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 plugins {
-    id("gxf.application-conventions")
+    id("org.springframework.boot")
 }
 
 dependencies {
@@ -15,6 +15,19 @@ dependencies {
 
     runtimeOnly("io.micrometer:micrometer-registry-prometheus")
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
+}
+
+tasks.withType<org.springframework.boot.gradle.tasks.bundling.BootBuildImage> {
+    imageName.set("ghcr.io/osgp/gxf-service-template:${version}")
+    if (project.hasProperty("publishImage")) {
+        publish.set(true)
+        docker {
+            publishRegistry {
+                username.set(System.getenv("GITHUB_ACTOR"))
+                password.set(System.getenv("GITHUB_TOKEN"))
+            }
+        }
+    }
 }
 
 testing {
