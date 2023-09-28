@@ -14,7 +14,7 @@ class AvroSerializer<T : SpecificRecord>(private val decoder: BinaryMessageEncod
         try {
             return decoder.encode(data).array()
         } catch (ex: Exception) {
-            throw SerializationException("Error serializing Avro message", ex)
+            throw SerializationException("Error serializing Avro message for topic: ${topic}", ex)
         }
     }
 }
