@@ -2,10 +2,6 @@
 //
 // SPDX-License-Identifier: Apache-2.0
 
-plugins {
-    id("gxf.spring-conventions")
-}
-
 dependencies {
     implementation(project(":components:avro"))
 
@@ -16,7 +12,11 @@ dependencies {
     implementation("org.springframework:spring-aop")
 
     implementation("org.springframework.kafka:spring-kafka")
-    implementation("io.confluent:kafka-avro-serializer:7.3.0")
+    implementation("com.microsoft.azure:msal4j:1.13.10")
 
-    annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
+    testImplementation("org.springframework:spring-test")
+
+    testImplementation("org.junit.jupiter:junit-jupiter-api")
+    testImplementation("org.junit.jupiter:junit-jupiter-engine")
+    testImplementation("org.junit.jupiter:junit-jupiter-params")
 }

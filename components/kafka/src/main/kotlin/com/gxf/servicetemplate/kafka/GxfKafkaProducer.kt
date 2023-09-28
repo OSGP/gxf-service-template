@@ -4,6 +4,7 @@
 
 package com.gxf.servicetemplate.kafka
 
+import com.gxf.service.Measurement
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.kafka.core.KafkaTemplate
@@ -14,7 +15,7 @@ import kotlin.random.Random
 
 @Service
 class GxfKafkaProducer(
-    private val kafkaTemplate: KafkaTemplate<String, Any>,
+    private val kafkaTemplate: KafkaTemplate<String, Measurement>,
     private val measurementGenerator: MeasurementGenerator
 ) {
 

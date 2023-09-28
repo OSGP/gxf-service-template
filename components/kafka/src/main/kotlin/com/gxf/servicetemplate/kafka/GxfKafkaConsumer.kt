@@ -25,7 +25,7 @@ class GxfKafkaConsumer {
     }
 
     @Observed(name = "consumer.consumed")
-    @KafkaListener(topics = ["avroTopic"])
+    @KafkaListener(topics = ["avroTopic"], id = "gxf-kafka-consumer")
     @RetryableTopic(
         backoff = Backoff(value = 3000L),
         attempts = "2",
