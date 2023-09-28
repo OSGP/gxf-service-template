@@ -2,7 +2,7 @@
 //
 // SPDX-License-Identifier: Apache-2.0
 
-package com.gxf.servicetemplate
+package org.gxf.servicetemplate
 
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest
