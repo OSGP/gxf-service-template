@@ -9,7 +9,6 @@ import org.apache.avro.message.BinaryMessageDecoder
 import org.apache.avro.specific.SpecificRecord
 import org.apache.kafka.common.errors.SerializationException
 import org.apache.kafka.common.serialization.Deserializer
-import org.slf4j.LoggerFactory
 
 class AvroDeserializer<T : SpecificRecord>(private val decoder: BinaryMessageDecoder<T>) : Deserializer<T> {
 
