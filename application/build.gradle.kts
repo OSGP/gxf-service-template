@@ -1,3 +1,10 @@
+// SPDX-FileCopyrightText: Contributors to the GXF project
+//
+// SPDX-License-Identifier: Apache-2.0
+
+plugins {
+    id("org.springframework.boot")
+}
 
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-actuator")
