@@ -26,11 +26,7 @@ jobs:
       - name: Build with Gradle
         uses: gradle/gradle-build-action@v2.8.1
         with:
-          arguments: build integrationTest bootBuildImage
-      - name: Run sonar analysis with Gradle
-        uses: gradle/gradle-build-action@v2.8.1
-        with:
-          arguments: sonar
+          arguments: build integrationTest bootBuildImage sonar
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       - name: Publish Docker image
