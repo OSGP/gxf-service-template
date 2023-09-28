@@ -12,7 +12,7 @@ plugins {
     kotlin("plugin.spring") version "1.9.10" apply false
     kotlin("plugin.jpa") version "1.9.10" apply false
     id("com.github.davidmc24.gradle.plugin.avro") version "1.8.0" apply false
-    id("org.sonarqube") version "4.4.0.3356"
+    id("org.sonarqube") version "4.3.1.3277"
     id("eclipse")
 }
 
@@ -25,6 +25,7 @@ sonarqube {
         property("sonar.organization", "gxf")
     }
 }
+tasks.sonar
 
 subprojects {
     apply(plugin = "org.jetbrains.kotlin.jvm")
