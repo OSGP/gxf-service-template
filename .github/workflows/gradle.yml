@@ -1,32 +1,37 @@
-# SPDX-FileCopyrightText: Contributors to the GXF project
-#
-# SPDX-License-Identifier: Apache-2.0
-
 name: Gradle Pipeline
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "main" , "develop" ]
+    tags: [ "v**" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "main", "develop"  ]
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
       - name: Set up JDK 17
         uses: actions/setup-java@v3
         with:
           java-version: '17'
           distribution: 'temurin'
       - name: Build with Gradle
-        uses: gradle/gradle-build-action@v2.4.0
+        uses: gradle/gradle-build-action@v2.8.1
         with:
-          arguments: build bootBuildImage
+          arguments: build integrationTest bootBuildImage
+      - name: Run sonar analysis with Gradle
+        uses: gradle/gradle-build-action@v2.8.1
+        with:
+          arguments: sonar
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       - name: Publish Docker image
-        if: github.ref == 'refs/heads/main'
-        uses: gradle/gradle-build-action@v2.4.0
+        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop' || github.ref_type == 'tag'
+        uses: gradle/gradle-build-action@v2.8.1
         with:
           arguments: bootBuildImage -PpublishImage
         env:
