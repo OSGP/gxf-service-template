@@ -44,7 +44,7 @@ class OAuthAuthenticateCallbackHandler : AuthenticateCallbackHandler {
         saslMechanism: String,
         jaasConfigEntries: List<AppConfigurationEntry>
     ) {
-setFields(getOptions(saslMechanism, jaasConfigEntries))
+        setFields(getOptions(saslMechanism, jaasConfigEntries))
     }
 
     private fun getOptions(
