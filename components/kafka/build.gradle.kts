@@ -8,7 +8,6 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-autoconfigure")
     implementation("org.springframework.boot:spring-boot-starter-logging")
 
-    implementation("org.springframework:spring-aspects")
     implementation("org.springframework:spring-aop")
 
     implementation("org.springframework.kafka:spring-kafka")
