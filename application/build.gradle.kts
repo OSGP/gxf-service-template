@@ -13,6 +13,8 @@ dependencies {
     implementation(project(":components:kafka"))
     implementation(project(":components:mqtt"))
 
+    implementation("org.springframework:spring-aspects")
+
     runtimeOnly("io.micrometer:micrometer-registry-prometheus")
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
 }
