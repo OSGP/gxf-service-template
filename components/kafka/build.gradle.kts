@@ -11,7 +11,8 @@ dependencies {
     implementation("org.springframework:spring-aop")
 
     implementation("org.springframework.kafka:spring-kafka")
-    implementation("com.microsoft.azure:msal4j:1.13.10")
+    implementation("com.gxf.utilities:kafka-avro:0.2")
+    implementation("com.gxf.utilities:kafka-azure-oauth:0.2")
 
     testImplementation("org.springframework:spring-test")
 

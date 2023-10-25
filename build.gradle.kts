@@ -38,6 +38,14 @@ subprojects {
 
     repositories {
         mavenCentral()
+        maven {
+            name = "GXFGithubPackages"
+            url = uri("https://maven.pkg.github.com/osgp/*")
+            credentials {
+                username = project.findProperty("github.username") as String? ?: System.getenv("GITHUB_ACTOR")
+                password = project.findProperty("github.token") as String? ?: System.getenv("GITHUB_TOKEN")
+            }
+        }
     }
 
     extensions.configure<JavaPluginExtension> {
