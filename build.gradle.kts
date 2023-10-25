@@ -25,14 +25,13 @@ sonarqube {
         property("sonar.organization", "gxf")
     }
 }
-tasks.sonar
 
 subprojects {
     apply(plugin = "org.jetbrains.kotlin.jvm")
     apply(plugin = "org.jetbrains.kotlin.plugin.spring")
     apply(plugin = "io.spring.dependency-management")
-    apply(plugin = "eclipse")
     apply(plugin = "org.jetbrains.kotlin.plugin.jpa")
+    apply(plugin = "eclipse")
 
     group = "org.gxf.template"
     version = rootProject.version
