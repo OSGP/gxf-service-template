@@ -40,7 +40,7 @@ testing {
                 implementation(project())
                 implementation("org.springframework.boot:spring-boot-starter-test")
                 implementation("org.springframework.kafka:spring-kafka-test")
-                implementation("org.testcontainers:kafka:1.17.6")
+                implementation("org.testcontainers:kafka:1.19.1")
             }
         }
     }

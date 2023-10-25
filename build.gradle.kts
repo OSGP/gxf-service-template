@@ -6,19 +6,19 @@ import io.spring.gradle.dependencymanagement.internal.dsl.StandardDependencyMana
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    id("org.springframework.boot") version "3.1.4" apply false
+    id("org.springframework.boot") version "3.1.5" apply false
     id("io.spring.dependency-management") version "1.1.3" apply false
     kotlin("jvm") version "1.9.10" apply false
     kotlin("plugin.spring") version "1.9.10" apply false
     kotlin("plugin.jpa") version "1.9.10" apply false
     id("com.github.davidmc24.gradle.plugin.avro") version "1.8.0" apply false
-    id("org.sonarqube") version "4.2.1.3168"
+    id("org.sonarqube") version "4.4.1.3373"
     id("eclipse")
 }
 
 version = System.getenv("GITHUB_REF_NAME")?.replace("/", "-")?.lowercase() ?: "develop"
 
-sonarqube {
+sonar {
     properties {
         property("sonar.host.url", "https://sonarcloud.io")
         property("sonar.projectKey", "OSGP_gxf-service-template")
