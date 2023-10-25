@@ -25,7 +25,7 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
       - name: Setup Gradle to generate and submit dependency graphs
-        uses: gradle/gradle-build-action@v2.9
+        uses: gradle/gradle-build-action@v2.9.0
         with:
           dependency-graph: generate-and-submit
       - name: Build with Gradle
