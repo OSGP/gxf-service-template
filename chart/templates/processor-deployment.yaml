@@ -1,0 +1,80 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.name }}
+  labels:
+    app: {{ .Values.name }}
+spec:
+  replicas: {{ .Values.deployment.replicas }}
+  selector:
+    matchLabels:
+      app: {{ .Values.name }}
+  template:
+    metadata:
+      name: {{ .Values.name }}
+      annotations:
+        prometheus.io/port: '8080'
+        prometheus.io/path: '/actuator/prometheus'
+        prometheus.io/scrape: 'true'
+      labels:
+        app: {{ .Values.name }}
+        {{- range $key, $value := .Values.deployment.labels }}
+        {{ $key }}: {{ $value }}
+        {{- end }}
+    spec:
+      serviceAccountName: {{ .Values.serviceAccount.name | default $.Values.name }}
+      restartPolicy: Always
+      {{- with .Values.deployment.secrets.imagePullSecret }}
+      imagePullSecrets:
+        - name: {{ . }}
+      {{- end }}
+      containers:
+        - name: processor
+          image: "{{ .Values.deployment.image }}:{{ required ".Values.deployment.imageTag is required" .Values.deployment.imageTag  }}"
+          envFrom:
+            - configMapRef:
+                name: {{ .Values.name }}-config
+          env:
+            {{- range .Values.deployment.secrets.environment }}
+            - name: {{ .envVariable }}
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .secretName }}
+                  key: {{ .secretKey }}
+            {{- end }}
+          {{- with .Values.deployment.resources }}
+          resources:
+            requests:
+              cpu: {{ .requests.cpu }}
+              {{/* For Java applications requests and limits should be equal */}}
+              memory: {{ .limits.memory }}
+            limits:
+              cpu: {{ .limits.cpu }}
+              memory: {{ .limits.memory }}
+          {{- end }}
+          ports:
+            - name: actuator
+              containerPort: 8080
+          startupProbe:
+            httpGet:
+              path: /actuator/health/liveness
+              port: actuator
+            failureThreshold: 30
+            periodSeconds: 5
+          livenessProbe:
+            httpGet:
+              path: /actuator/health/liveness
+              port: actuator
+            failureThreshold: 4
+            periodSeconds: 15
+          volumeMounts:
+            {{- range .Values.deployment.secrets.volumes }}
+            - name: {{ .secretName }}
+              mountPath: {{ .path }}
+            {{- end }}
+      volumes:
+        {{- range .Values.deployment.secrets.volumes }}
+        - name: {{ .secretName }}
+          secret:
+            secretName: {{ .secretName }}
+        {{- end }}
