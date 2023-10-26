@@ -6,13 +6,14 @@ name: Gradle Pipeline
 
 on:
   push:
-    branches: [ "main" , "develop" ]
+    branches: [ "main" ]
     tags: [ "v**" ]
   pull_request:
-    branches: [ "main", "develop"  ]
+    branches: [ "main" ]
 
 jobs:
   build:
+    timeout-minutes: 30
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -23,17 +24,22 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
-      - name: Build with Gradle
-        uses: gradle/gradle-build-action@v2.8.1
+      - name: Setup Gradle to generate and submit dependency graphs
+        uses: gradle/gradle-build-action@v2.9.0
         with:
-          arguments: build integrationTest bootBuildImage sonar
+          dependency-graph: generate-and-submit
+      - name: Build with Gradle
+        run: ./gradlew build integrationTest bootBuildImage
         env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Run sonar analysis with Gradle
+        run: ./gradlew sonar
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       - name: Publish Docker image
-        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop' || github.ref_type == 'tag'
-        uses: gradle/gradle-build-action@v2.8.1
-        with:
-          arguments: bootBuildImage -PpublishImage
+        if: github.ref == 'refs/heads/main' || github.ref_type == 'tag'
+        run: ./gradlew bootBuildImage -PpublishImage
         env:
           GITHUB_ACTOR: ${{ github.actor }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

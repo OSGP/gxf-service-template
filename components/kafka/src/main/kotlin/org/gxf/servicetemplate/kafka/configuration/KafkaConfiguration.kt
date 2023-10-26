@@ -4,6 +4,8 @@
 
 package org.gxf.servicetemplate.kafka.configuration
 
+import com.gxf.utilities.kafka.avro.AvroDeserializer
+import com.gxf.utilities.kafka.avro.AvroSerializer
 import org.gxf.service.Measurement
 import org.apache.kafka.common.serialization.StringDeserializer
 import org.apache.kafka.common.serialization.StringSerializer
