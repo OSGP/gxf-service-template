@@ -54,8 +54,9 @@ jobs:
           version: v3.12.0
       # TODO install and publish cr without creating a new release
       - name: Publish Helm chart
-        uses: helm/chart-releaser-action@v1.5.0
+        uses: osgp/chart-releaser-action@v1.6.1-gxf
         with:
           charts_dir: ./
+          use_existing_release: true
         env:
           CR_TOKEN: ${{ secrets.GITHUB_TOKEN }}
