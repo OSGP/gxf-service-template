@@ -58,5 +58,6 @@ jobs:
         with:
           charts_dir: ./
           use_existing_release: true
+          release-name-template: "{{ .Version }}"
         env:
           CR_TOKEN: ${{ secrets.GITHUB_TOKEN }}
