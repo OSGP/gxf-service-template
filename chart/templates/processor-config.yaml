@@ -1,0 +1,6 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Values.name }}-config
+data:
+  SPRING_APPLICATION_JSON: {{ .Values.springConfig | toJson | quote }}
