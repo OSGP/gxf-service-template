@@ -8,3 +8,13 @@ include("application")
 include("components:avro")
 include("components:kafka")
 include("components:mqtt")
+
+dependencyResolutionManagement {
+    versionCatalogs {
+        create("libs") {
+            version("gxfUtils", "0.2")
+            library("kafkaAvro", "com.gxf.utilities", "kafka-avro").versionRef("gxfUtils")
+            library("kafkaAzureOAuth", "com.gxf.utilities", "kafka-azure-oauth").versionRef("gxfUtils")
+        }
+    }
+}
