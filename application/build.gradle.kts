@@ -16,7 +16,6 @@ dependencies {
     implementation("org.springframework:spring-aspects")
 
     runtimeOnly("io.micrometer:micrometer-registry-prometheus")
-    annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
 }
 
 tasks.withType<org.springframework.boot.gradle.tasks.bundling.BootBuildImage> {
@@ -40,7 +39,7 @@ testing {
                 implementation(project())
                 implementation("org.springframework.boot:spring-boot-starter-test")
                 implementation("org.springframework.kafka:spring-kafka-test")
-                implementation("org.testcontainers:kafka:1.19.1")
+                implementation(integrationTestLibs.kafkaTestContainers)
             }
         }
     }

@@ -6,13 +6,13 @@ dependencies {
     implementation(project(":components:avro"))
 
     implementation("org.springframework.boot:spring-boot-autoconfigure")
-    implementation("org.springframework.boot:spring-boot-starter-logging")
+    implementation(libs.logging)
 
     implementation("org.springframework:spring-aop")
 
     implementation("org.springframework.kafka:spring-kafka")
-    implementation("com.gxf.utilities:kafka-avro:0.2")
-    implementation("com.gxf.utilities:kafka-azure-oauth:0.2")
+    implementation(libs.kafkaAvro)
+    implementation(libs.kafkaAzureOAuth)
 
     testImplementation("org.springframework:spring-test")
 

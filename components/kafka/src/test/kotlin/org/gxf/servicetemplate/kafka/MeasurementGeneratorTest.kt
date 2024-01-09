@@ -4,9 +4,7 @@
 
 package org.gxf.servicetemplate.kafka
 
-import org.gxf.servicetemplate.kafka.MeasurementGenerator
-import org.junit.jupiter.api.Assertions.*
-
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
 class MeasurementGeneratorTest {

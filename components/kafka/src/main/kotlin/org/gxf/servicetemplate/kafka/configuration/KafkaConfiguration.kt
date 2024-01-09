@@ -10,6 +10,7 @@ import org.gxf.service.Measurement
 import org.apache.kafka.common.serialization.StringDeserializer
 import org.apache.kafka.common.serialization.StringSerializer
 import org.springframework.boot.autoconfigure.kafka.KafkaProperties
+import org.springframework.boot.ssl.SslBundles
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.kafka.config.ConcurrentKafkaListenerContainerFactory
@@ -17,7 +18,7 @@ import org.springframework.kafka.core.*
 
 
 @Configuration
-class KafkaConfiguration(val kafkaProperties: KafkaProperties) {
+class KafkaConfiguration(val kafkaProperties: KafkaProperties, private val sslBundles: SslBundles) {
 
     @Bean
     fun kafkaListenerContainerFactory(consumerFactory: ConsumerFactory<String, Measurement>): ConcurrentKafkaListenerContainerFactory<String, Measurement> =
@@ -31,7 +32,7 @@ class KafkaConfiguration(val kafkaProperties: KafkaProperties) {
     @Bean
     fun consumerFactory(): ConsumerFactory<String, Measurement> =
         DefaultKafkaConsumerFactory(
-            kafkaProperties.buildConsumerProperties(),
+            kafkaProperties.buildConsumerProperties(sslBundles),
             StringDeserializer(),
             AvroDeserializer(Measurement.getDecoder())
         )
@@ -39,7 +40,7 @@ class KafkaConfiguration(val kafkaProperties: KafkaProperties) {
     @Bean
     fun producerFactory(): ProducerFactory<String, Measurement> =
         DefaultKafkaProducerFactory(
-            kafkaProperties.buildProducerProperties(),
+            kafkaProperties.buildProducerProperties(sslBundles),
             StringSerializer(),
             AvroSerializer(Measurement.getEncoder())
         )
