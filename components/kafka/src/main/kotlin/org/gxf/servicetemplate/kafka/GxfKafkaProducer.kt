@@ -18,9 +18,7 @@ class GxfKafkaProducer(
     private val measurementGenerator: MeasurementGenerator
 ) {
 
-    companion object {
-        private val logger = KotlinLogging.logger { }
-    }
+    private val logger = KotlinLogging.logger { }
 
     @Scheduled(cron = "* * * * * *")
     fun producer() {

@@ -16,9 +16,7 @@ import java.time.ZoneOffset
 @Service
 class GxfKafkaConsumer {
 
-    companion object {
-        private val logger = KotlinLogging.logger { }
-    }
+    private val logger = KotlinLogging.logger { }
 
     @KafkaListener(topics = ["avroTopic"], id = "gxf-kafka-consumer")
     fun consume(record: ConsumerRecord<String, Measurement>) {

@@ -19,9 +19,7 @@ class MqttMessageConsumer(
     private val clientFactory: MqttPahoClientFactory
 ) {
 
-    companion object {
-        private val logger = KotlinLogging.logger { }
-    }
+    private val logger = KotlinLogging.logger { }
 
     // Test with: mosquitto_pub -h localhost -t topic1 -m 23 -u admin -P password
     @Bean
