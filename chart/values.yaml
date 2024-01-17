@@ -1,0 +1,48 @@
+name: gxf-service-template
+
+serviceAccount:
+  apiVersion: v1
+  kind: ServiceAccount
+
+deployment:
+  image: "ghcr.io/osgp/gxf-service-template"
+  replicas: 1
+  resources:
+    requests:
+      cpu: 200m
+    limits:
+      cpu: 2
+      memory: 1Gi
+
+  labels:
+    label-one: 'true'
+    label-two: 'false'
+
+  secrets:
+    imagePullSecret: "image-pull-secret"
+    volumes:
+      - secretName: "test-volume-one"
+        path: "/etc/secret/one"
+      - secretName: "test-volume-two"
+        path: "/etc/secret/two"
+    environment:
+      - envVariable: "SPRING_DATASOURCE_PASSWORD"
+        secretName: "database-secret"
+        secretKey: "password"
+      - envVariable: "MQTT_PASSWORD"
+        secretName: "mqtt-secret"
+        secretKey: "password"
+
+springConfig:
+  spring:
+    profiles:
+      active: "kafka-oauth"
+    datasource:
+      url: "jdbc:postgresql://postgres_database:5432/gxf_service_template"
+      username: "gxf_service_template"
+    kafka:
+      bootstrap-servers: "kafka-server:9092"
+  logging:
+    level:
+      org:
+        gxf: "DEBUG"
