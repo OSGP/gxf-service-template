@@ -12,22 +12,17 @@ include("components:mqtt")
 dependencyResolutionManagement {
     versionCatalogs {
         create("libs") {
-            library("logging", "io.github.oshai", "kotlin-logging-jvm").version("6.0.1")
+            library("logging", "io.github.oshai", "kotlin-logging-jvm").version("7.0.0")
 
             version("mapstruct", "1.5.5.Final")
             library("mapstruct", "org.mapstruct", "mapstruct").versionRef("mapstruct")
             library("mapstructannotation", "org.mapstruct", "mapstruct-processor").versionRef("mapstruct")
 
-            library("avro", "org.apache.avro", "avro").version("1.11.3")
+            library("avro", "org.apache.avro", "avro").version("1.12.0")
 
-            version("gxfUtils", "0.2")
+            version("gxfUtils", "2.0")
             library("kafkaAvro", "com.gxf.utilities", "kafka-avro").versionRef("gxfUtils")
             library("kafkaAzureOAuth", "com.gxf.utilities", "kafka-azure-oauth").versionRef("gxfUtils")
-        }
-        create("integrationTestLibs") {
-            version("testContainers", "1.19.3")
-            library("kafkaTestContainers", "org.testcontainers", "kafka").versionRef("testContainers")
-
         }
     }
 }

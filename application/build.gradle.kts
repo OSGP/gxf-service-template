@@ -39,7 +39,7 @@ testing {
                 implementation(project())
                 implementation("org.springframework.boot:spring-boot-starter-test")
                 implementation("org.springframework.kafka:spring-kafka-test")
-                implementation(integrationTestLibs.kafkaTestContainers)
+                implementation("org.testcontainers:kafka")
             }
         }
     }
