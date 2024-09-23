@@ -6,6 +6,7 @@ package org.gxf.servicetemplate.kafka.configuration
 
 import com.gxf.utilities.kafka.avro.AvroDeserializer
 import com.gxf.utilities.kafka.avro.AvroSerializer
+import org.apache.avro.specific.SpecificRecordBase
 import org.gxf.service.Measurement
 import org.apache.kafka.common.serialization.StringDeserializer
 import org.apache.kafka.common.serialization.StringSerializer
@@ -30,18 +31,18 @@ class KafkaConfiguration(val kafkaProperties: KafkaProperties, private val sslBu
         KafkaTemplate(producerFactory)
 
     @Bean
-    fun consumerFactory(): ConsumerFactory<String, Measurement> =
+    fun consumerFactory(): ConsumerFactory<String, SpecificRecordBase> =
         DefaultKafkaConsumerFactory(
             kafkaProperties.buildConsumerProperties(sslBundles),
             StringDeserializer(),
-            AvroDeserializer(Measurement.getDecoder())
+            AvroDeserializer(listOf(Measurement.getClassSchema()))
         )
 
     @Bean
-    fun producerFactory(): ProducerFactory<String, Measurement> =
+    fun producerFactory(): ProducerFactory<String, SpecificRecordBase> =
         DefaultKafkaProducerFactory(
             kafkaProperties.buildProducerProperties(sslBundles),
             StringSerializer(),
-            AvroSerializer(Measurement.getEncoder())
+            AvroSerializer()
         )
 }
