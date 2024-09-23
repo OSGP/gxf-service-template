@@ -16,6 +16,9 @@ dependencies {
     implementation("org.springframework:spring-aspects")
 
     runtimeOnly("io.micrometer:micrometer-registry-prometheus")
+
+    // Generate test and integration test reports
+    jacocoAggregation(project(":application"))
 }
 
 tasks.withType<org.springframework.boot.gradle.tasks.bundling.BootBuildImage> {
@@ -39,7 +42,7 @@ testing {
                 implementation(project())
                 implementation("org.springframework.boot:spring-boot-starter-test")
                 implementation("org.springframework.kafka:spring-kafka-test")
-                implementation(integrationTestLibs.kafkaTestContainers)
+                implementation("org.testcontainers:kafka")
             }
         }
     }
