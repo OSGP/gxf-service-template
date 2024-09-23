@@ -22,12 +22,12 @@ import org.springframework.kafka.core.*
 class KafkaConfiguration(val kafkaProperties: KafkaProperties, private val sslBundles: SslBundles) {
 
     @Bean
-    fun kafkaListenerContainerFactory(consumerFactory: ConsumerFactory<String, Measurement>): ConcurrentKafkaListenerContainerFactory<String, Measurement> =
-        ConcurrentKafkaListenerContainerFactory<String, Measurement>()
+    fun kafkaListenerContainerFactory(consumerFactory: ConsumerFactory<String, SpecificRecordBase>): ConcurrentKafkaListenerContainerFactory<String, SpecificRecordBase> =
+        ConcurrentKafkaListenerContainerFactory<String, SpecificRecordBase>()
             .apply { this.consumerFactory = consumerFactory }
 
     @Bean
-    fun kafkaTemplate(producerFactory: ProducerFactory<String, Measurement>) =
+    fun kafkaTemplate(producerFactory: ProducerFactory<String, SpecificRecordBase>) =
         KafkaTemplate(producerFactory)
 
     @Bean
