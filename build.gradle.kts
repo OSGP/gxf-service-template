@@ -3,7 +3,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import io.spring.gradle.dependencymanagement.internal.dsl.StandardDependencyManagementExtension
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import org.jetbrains.kotlin.gradle.dsl.KotlinJvmProjectExtension
 
 plugins {
     id("org.springframework.boot") version "3.3.4" apply false
@@ -32,6 +32,8 @@ subprojects {
     apply(plugin = "io.spring.dependency-management")
     apply(plugin = "org.jetbrains.kotlin.plugin.jpa")
     apply(plugin = "eclipse")
+    apply(plugin = "jacoco")
+    apply(plugin = "jacoco-report-aggregation")
 
     group = "org.gxf.template"
     version = rootProject.version
@@ -48,22 +50,18 @@ subprojects {
         }
     }
 
-    extensions.configure<JavaPluginExtension> {
-        toolchain {
-            languageVersion.set(JavaLanguageVersion.of(21))
-        }
-    }
-
     extensions.configure<StandardDependencyManagementExtension> {
         imports {
             mavenBom(org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES)
         }
     }
 
-    tasks.withType<KotlinCompile> {
-        kotlinOptions {
+    extensions.configure<KotlinJvmProjectExtension> {
+        jvmToolchain {
+            languageVersion = JavaLanguageVersion.of(21)
+        }
+        compilerOptions {
             freeCompilerArgs = listOf("-Xjsr305=strict")
-            jvmTarget = "21"
         }
     }
 
