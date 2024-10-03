@@ -2,8 +2,10 @@
 //
 // SPDX-License-Identifier: Apache-2.0
 
+import com.diffplug.gradle.spotless.SpotlessExtension
 import io.spring.gradle.dependencymanagement.internal.dsl.StandardDependencyManagementExtension
 import org.jetbrains.kotlin.gradle.dsl.KotlinJvmProjectExtension
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     id("org.springframework.boot") version "3.3.4" apply false
@@ -13,6 +15,7 @@ plugins {
     kotlin("plugin.jpa") version "2.0.20" apply false
     id("com.github.davidmc24.gradle.plugin.avro") version "1.9.1" apply false
     id("org.sonarqube") version "5.1.0.4882"
+    id("com.diffplug.spotless") version("6.25.0")
     id("eclipse")
 }
 
@@ -34,6 +37,7 @@ subprojects {
     apply(plugin = "eclipse")
     apply(plugin = "jacoco")
     apply(plugin = "jacoco-report-aggregation")
+    apply(plugin =  "com.diffplug.spotless")
 
     group = "org.gxf.template"
     version = rootProject.version
@@ -47,6 +51,19 @@ subprojects {
                 username = project.findProperty("github.username") as String? ?: System.getenv("GITHUB_ACTOR")
                 password = project.findProperty("github.token") as String? ?: System.getenv("GITHUB_TOKEN")
             }
+        }
+    }
+
+    extensions.configure<SpotlessExtension> {
+        kotlin {
+            // by default the target is every '.kt' and '.kts' file in the java source sets
+            ktfmt().dropboxStyle().configure {
+                it.setMaxWidth(120)
+            }
+            licenseHeaderFile(
+                "${project.rootDir}/license-template.kt",
+                "package")
+                .updateYearWithLatest(false)
         }
     }
 
@@ -67,5 +84,18 @@ subprojects {
 
     tasks.withType<Test> {
         useJUnitPlatform()
+    }
+
+    tasks.register<Copy>("updateGitHooks") {
+        description = "Copies the pre-commit Git Hook to the .git/hooks folder."
+        group = "verification"
+        from("${project.rootDir}/scripts/pre-commit")
+        into("${project.rootDir}/.git/hooks")
+    }
+
+    tasks.withType<KotlinCompile> {
+        dependsOn(
+            tasks.named("updateGitHooks")
+        )
     }
 }

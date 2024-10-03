@@ -1,7 +1,6 @@
-// SPDX-FileCopyrightText: Contributors to the GXF project
+// SPDX-FileCopyrightText: Copyright Contributors to the GXF project
 //
 // SPDX-License-Identifier: Apache-2.0
-
 package org.gxf.servicetemplate.kafka
 
 import org.junit.jupiter.api.Assertions.assertEquals
@@ -15,6 +14,5 @@ class MeasurementGeneratorTest {
 
         val measurement = measurementGenerator.generateMeasurement(1)
         assertEquals(1, measurement.deviceId)
-
     }
 }
