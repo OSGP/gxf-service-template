@@ -20,7 +20,7 @@ dependencyResolutionManagement {
 
             library("avro", "org.apache.avro", "avro").version("1.12.0")
 
-            version("gxfUtils", "2.0")
+            version("gxfUtils", "2.1")
             library("kafkaAvro", "com.gxf.utilities", "kafka-avro").versionRef("gxfUtils")
             library("kafkaAzureOAuth", "com.gxf.utilities", "kafka-azure-oauth").versionRef("gxfUtils")
         }
