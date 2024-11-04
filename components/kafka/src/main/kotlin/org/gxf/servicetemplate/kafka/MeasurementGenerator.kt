@@ -11,9 +11,11 @@ import org.springframework.stereotype.Service
 
 @Service
 class MeasurementGenerator {
-
     fun generateMeasurement(deviceId: Long): Measurement {
         return Measurement(
-            Instant.now().toEpochMilli(), deviceId, listOf(VoltageMeasurement(Random.nextDouble(), "one")))
+            Instant.now().toEpochMilli(),
+            deviceId,
+            listOf(VoltageMeasurement(Random.nextDouble(), "one"))
+        )
     }
 }

@@ -18,11 +18,8 @@ import org.springframework.kafka.core.*
 
 @Configuration
 class KafkaConfiguration(val kafkaProperties: KafkaProperties, private val sslBundles: SslBundles) {
-
     @Bean
-    fun kafkaListenerContainerFactory(
-        consumerFactory: ConsumerFactory<String, SpecificRecordBase>
-    ): ConcurrentKafkaListenerContainerFactory<String, SpecificRecordBase> =
+    fun kafkaListenerContainerFactory(consumerFactory: ConsumerFactory<String, SpecificRecordBase>) =
         ConcurrentKafkaListenerContainerFactory<String, SpecificRecordBase>().apply {
             this.consumerFactory = consumerFactory
         }
@@ -35,10 +32,14 @@ class KafkaConfiguration(val kafkaProperties: KafkaProperties, private val sslBu
         DefaultKafkaConsumerFactory(
             kafkaProperties.buildConsumerProperties(sslBundles),
             StringDeserializer(),
-            AvroDeserializer(listOf(Measurement.getClassSchema())))
+            AvroDeserializer(listOf(Measurement.getClassSchema()))
+        )
 
     @Bean
     fun producerFactory(): ProducerFactory<String, SpecificRecordBase> =
         DefaultKafkaProducerFactory(
-            kafkaProperties.buildProducerProperties(sslBundles), StringSerializer(), AvroSerializer())
+            kafkaProperties.buildProducerProperties(sslBundles),
+            StringSerializer(),
+            AvroSerializer()
+        )
 }
