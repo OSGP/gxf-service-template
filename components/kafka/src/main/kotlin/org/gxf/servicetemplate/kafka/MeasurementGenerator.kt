@@ -15,7 +15,7 @@ class MeasurementGenerator {
         return Measurement(
             Instant.now().toEpochMilli(),
             deviceId,
-            listOf(VoltageMeasurement(Random.nextDouble(), "one"))
+            listOf(VoltageMeasurement(Random.nextDouble(), "one")),
         )
     }
 }

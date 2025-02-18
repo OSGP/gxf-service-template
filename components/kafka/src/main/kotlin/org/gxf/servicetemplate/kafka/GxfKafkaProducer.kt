@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service
 @Service
 class GxfKafkaProducer(
     private val kafkaTemplate: KafkaTemplate<String, SpecificRecordBase>,
-    private val measurementGenerator: MeasurementGenerator
+    private val measurementGenerator: MeasurementGenerator,
 ) {
 
     private val logger = KotlinLogging.logger {}

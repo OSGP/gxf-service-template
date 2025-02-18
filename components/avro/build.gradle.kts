@@ -2,10 +2,6 @@
 //
 // SPDX-License-Identifier: Apache-2.0
 
-plugins {
-    id("com.github.davidmc24.gradle.plugin.avro")
-}
+plugins { alias(libs.plugins.avro) }
 
-dependencies {
-    api(libs.avro)
-}
+dependencies { api(libs.avro) }
