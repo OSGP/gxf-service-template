@@ -5,18 +5,18 @@
 dependencies {
     implementation(project(":components:avro"))
 
-    implementation("org.springframework.boot:spring-boot-autoconfigure")
+    implementation(libs.springBootAutoconfigure)
     implementation(libs.logging)
 
-    implementation("org.springframework:spring-aop")
+    implementation(libs.springAop)
 
-    implementation("org.springframework.kafka:spring-kafka")
+    implementation(libs.springKafka)
     implementation(libs.kafkaAvro)
     implementation(libs.kafkaAzureOAuth)
 
-    testImplementation("org.springframework:spring-test")
+    testImplementation(libs.springTest)
 
-    testImplementation("org.junit.jupiter:junit-jupiter-api")
-    testImplementation("org.junit.jupiter:junit-jupiter-engine")
-    testImplementation("org.junit.jupiter:junit-jupiter-params")
+    testImplementation(libs.junitJupiterApi)
+    testImplementation(libs.junitJupiterEngine)
+    testImplementation(libs.junitJupiterParams)
 }

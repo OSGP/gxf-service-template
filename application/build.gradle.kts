@@ -2,20 +2,18 @@
 //
 // SPDX-License-Identifier: Apache-2.0
 
-plugins {
-    id("org.springframework.boot")
-}
+plugins { alias(libs.plugins.springBoot) }
 
 dependencies {
-    implementation("org.springframework.boot:spring-boot-starter-actuator")
-    implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation(libs.springBootStarterActuator)
+    implementation(libs.springBootStarterWeb)
 
     implementation(project(":components:kafka"))
     implementation(project(":components:mqtt"))
 
-    implementation("org.springframework:spring-aspects")
+    implementation(libs.springAspects)
 
-    runtimeOnly("io.micrometer:micrometer-registry-prometheus")
+    runtimeOnly(libs.micrometerPrometheusModule)
 
     // Generate test and integration test reports
     jacocoAggregation(project(":application"))
@@ -36,14 +34,15 @@ tasks.withType<org.springframework.boot.gradle.tasks.bundling.BootBuildImage> {
 
 testing {
     suites {
-        val integrationTest by registering(JvmTestSuite::class) {
-            useJUnitJupiter()
-            dependencies {
-                implementation(project())
-                implementation("org.springframework.boot:spring-boot-starter-test")
-                implementation("org.springframework.kafka:spring-kafka-test")
-                implementation("org.testcontainers:kafka")
+        val integrationTest by
+            registering(JvmTestSuite::class) {
+                useJUnitJupiter()
+                dependencies {
+                    implementation(project())
+                    implementation(libs.springBootStarterTest)
+                    implementation(libs.springKafkaTest)
+                    implementation(libs.kafkaTestContainer)
+                }
             }
-        }
     }
 }

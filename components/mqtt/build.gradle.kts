@@ -5,5 +5,5 @@
 dependencies {
     implementation(libs.logging)
 
-    implementation("org.springframework.integration:spring-integration-mqtt")
+    implementation(libs.springIntegrationMqtt)
 }
