@@ -12,9 +12,18 @@ updates:
   - package-ecosystem: "gradle"
     directory: "/"
     registries: "*"
+    open-pull-requests-limit: 10
     schedule:
       interval: "daily"
+    groups:
+      all:
+        patterns:
+          - "*"
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
-      interval: "daily"
+      interval: "weekly"
+    groups:
+      all:
+        patterns:
+          - "*"
