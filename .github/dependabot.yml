@@ -16,7 +16,15 @@ updates:
     schedule:
       interval: "daily"
     groups:
-      all:
+      minor-patch:
+        update-types:
+          - "minor"
+          - "patch"
+        patterns:
+          - "*"
+      major:
+        update-types:
+          - "major"
         patterns:
           - "*"
   - package-ecosystem: "github-actions"
