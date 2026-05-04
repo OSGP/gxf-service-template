@@ -11,7 +11,7 @@ kotlin = "2.3.20"
 mqttclient = "1.2.5"
 logging = "8.0.02"
 sonarqube = "7.3.0.8198"
-spotless = "7.0.2"
+spotless = "8.4.0"
 springBoot = "4.0.5"
 
 [libraries]
