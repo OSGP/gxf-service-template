@@ -12,7 +12,7 @@ logging = "8.0.02"
 sonarqube = "7.3.0.8198"
 springBoot = "4.0.6"
 gxfUtils = "3.1.1"
-spotless = "8.4.0"
+spotless = "8.5.0"
 
 [libraries]
 avro = { group = "org.apache.avro", name = "avro", version.ref = "avro" }
