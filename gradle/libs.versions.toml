@@ -6,13 +6,13 @@
 avro = "1.12.1"
 avroPlugin = "1.9.1"
 dependencyManagement = "1.1.7"
-kotlin = "2.3.21"
+kotlin = "2.4.0"
 mqttclient = "1.2.5"
-logging = "8.0.03"
-sonarqube = "7.3.0.8198"
+logging = "8.0.4"
+sonarqube = "7.3.1.8318"
 springBoot = "4.0.6"
 gxfUtils = "3.1.1"
-spotless = "8.5.1"
+spotless = "8.6.0"
 
 [libraries]
 avro = { group = "org.apache.avro", name = "avro", version.ref = "avro" }
